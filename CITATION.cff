@@ -1,0 +1,125 @@
+cff-version: 1.2.0
+message: "If you use DentIndices in your research, please cite it as below, together with the original publication of each index you use (dentindices cite <index>)."
+title: "DentIndices: open, tested oral-health epidemiology indices"
+abstract: >-
+  DentIndices computes the indices used in oral-health surveys, trials and clinics: DMFT/DMFS and
+  dmft/dmfs with WHO 2013 coding, SiC, SaC, care and restorative indices, PUFA, BPE and the
+  simplified BPE for under-18s, CPITN, the WHO 2013 CPI and loss of attachment, the Plaque and
+  Gingival Index, the Plaque Control Record, OHI-S, BEWE, Dean's index and the Community Fluorosis
+  Index, the Dental Aesthetic Index, and the CDC/AAP and ACES periodontitis case definitions. Every
+  rule is kept in one machine-readable registry with its source, a verification level and a
+  documented decision wherever sources disagree; every result returns its components, band,
+  guidance, warnings and a step-by-step trace. It ships as a dependency-free Python package and
+  command-line tool and as a private in-browser application whose JavaScript engine is tested for
+  identical output against the Python package.
+type: software
+authors:
+  - family-names: "Boustani Hezarani"
+    given-names: "Hossein"
+    orcid: "https://orcid.org/0009-0007-8481-0498"
+    affiliation: "Independent researcher, Ankara, Türkiye"
+version: "1.0.0"
+date-released: "2026-11-23"
+license: MIT
+repository-code: "https://github.com/Hezarani/dentindices"
+url: "https://hezarani.github.io/dentindices/"
+identifiers:
+  - type: url
+    value: "https://pypi.org/project/dentindices/"
+    description: "Python package"
+keywords:
+  - dental public health
+  - oral epidemiology
+  - oral health surveys
+  - DMFT
+  - dental caries
+  - Significant Caries Index
+  - periodontal screening
+  - BPE
+  - CPITN
+  - periodontitis
+  - CDC/AAP
+  - ACES
+  - BEWE
+  - dental fluorosis
+  - Dental Aesthetic Index
+references:
+  - type: book
+    title: "Oral health surveys: basic methods, 5th edition"
+    authors:
+      - name: "World Health Organization"
+    year: 2013
+    publisher:
+      name: "World Health Organization"
+    url: "https://iris.who.int/handle/10665/97035"
+  - type: article
+    title: "Introducing the Significant Caries Index together with a proposal for a new global oral health goal for 12-year-olds"
+    authors:
+      - family-names: Bratthall
+        given-names: Douglas
+    journal: "International Dental Journal"
+    year: 2000
+    volume: 50
+    issue: 6
+    start: 378
+    end: 384
+    doi: "10.1111/j.1875-595X.2000.tb00572.x"
+  - type: article
+    title: "Update of the case definitions for population-based surveillance of periodontitis"
+    authors:
+      - family-names: Eke
+        given-names: Paul I.
+      - family-names: Page
+        given-names: Roy C.
+      - family-names: Wei
+        given-names: Liang
+      - family-names: Thornton-Evans
+        given-names: Gina
+      - family-names: Genco
+        given-names: Robert J.
+    journal: "Journal of Periodontology"
+    year: 2012
+    volume: 83
+    issue: 12
+    start: 1449
+    end: 1454
+    doi: "10.1902/jop.2012.110664"
+  - type: article
+    title: "ACES: a new framework for the application of the 2018 periodontal status classification scheme to epidemiological survey data"
+    authors:
+      - family-names: Holtfreter
+        given-names: Birte
+      - name: "et al."
+    journal: "Journal of Clinical Periodontology"
+    year: 2024
+    volume: 51
+    issue: 5
+    start: 512
+    end: 521
+    doi: "10.1111/jcpe.13965"
+  - type: article
+    title: "Basic Erosive Wear Examination (BEWE): a new scoring system for scientific and clinical needs"
+    authors:
+      - family-names: Bartlett
+        given-names: David
+      - family-names: Ganss
+        given-names: Carolina
+      - family-names: Lussi
+        given-names: Adrian
+    journal: "Clinical Oral Investigations"
+    year: 2008
+    volume: 12
+    issue: "Suppl 1"
+    start: S65
+    end: S68
+    doi: "10.1007/s00784-007-0181-5"
+  - type: software
+    title: "tooth: Dental Public Health Indices and Odontogram Visualizations"
+    authors:
+      - family-names: Selvaraj
+        given-names: David
+      - family-names: Nelson
+        given-names: Suchitra
+    year: 2026
+    version: "0.5.0"
+    doi: "10.32614/CRAN.package.tooth"

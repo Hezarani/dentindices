@@ -1,0 +1,11 @@
+include LICENSE
+include README.md
+include CITATION.cff
+include CHANGELOG.md
+include dentindices/data/indices.json
+include dentindices/data/examples/*.csv
+include dentindices/py.typed
+prune tests
+prune docs
+prune assets
+prune scripts

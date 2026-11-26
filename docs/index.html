@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DentIndices — oral-health indices, computed as the sources define them</title>
+<meta name="description" content="Open calculators for DMFT/dmft, DMFS, SiC, SaC, PUFA, BPE, CPITN, CPI, BEWE, plaque and gingival indices, OHI-S, Dean's index and CFI, DAI, and CDC/AAP and ACES periodontitis case definitions. Every rule cited; runs entirely in your browser.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://hezarani.github.io/dentindices/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DentIndices">
+<meta property="og:title" content="DentIndices — oral-health epidemiology indices">
+<meta property="og:description" content="DMFT, SiC, PUFA, BPE, CPITN, BEWE, plaque and gingival indices, OHI-S, fluorosis, DAI, CDC/AAP and ACES — open, tested, every rule cited. Runs in your browser.">
+<meta property="og:url" content="https://hezarani.github.io/dentindices/">
+<meta property="og:image" content="https://hezarani.github.io/dentindices/social-preview.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="DentIndices: open, tested oral-health epidemiology indices with cited rules.">
+<meta name="twitter:card" content="summary_large_image">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%230b6e86'/%3E%3Cpath d='M20 14c-5 0-8 5-7 11 1 5 3 8 4 14 1 5 2 11 5 11 3 0 3-6 5-10 1-2 3-2 4 0 2 4 2 10 5 10 3 0 4-6 5-11 1-6 3-9 4-14 1-6-2-11-7-11-4 0-6 2-9 2s-5-2-9-2z' fill='white'/%3E%3Cpath d='M22 30h20M22 36h14' stroke='%230b6e86' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+:root {
+  --bg: #f5f5f7; --surface: #ffffff; --surface-2: #f9f9fb; --text: #1d1d1f; --text-2: #55555b; --text-3: #6e6e73;
+  --hairline: rgba(0,0,0,.08); --hairline-2: rgba(0,0,0,.16); --fill: rgba(0,0,0,.05); --fill-2: rgba(0,0,0,.09);
+  --accent: #0b6e86; --accent-press: #095c70; --accent-soft: rgba(11,110,134,.10); --accent-text: #0a6378; --on-accent: #fff;
+  --ok: #2a6e47; --warn: #875600; --bad: #b4234a; --ok-soft: rgba(47,122,79,.12); --warn-soft: rgba(168,106,11,.12); --bad-soft: rgba(180,35,74,.10);
+  --c-sound: #e7eef0; --c-caries: #c43a46; --c-fillcar: #a86016; --c-filled: #2f74c0; --c-miss: #4a4a52; --c-missoth: #76767e;
+  --c-seal: #24804f; --c-crown: #7a4fc4; --c-unerupted: transparent; --c-norec: #d9d9de;
+  --shadow: 0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06);
+  --bar: rgba(245,245,247,.74); --radius: 20px; --radius-s: 12px;
+  --spring: cubic-bezier(.22,1,.36,1);
+  font: 100%/1.5 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, Roboto, "Helvetica Neue", sans-serif;
+  color: var(--text); background: var(--bg);
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  scroll-padding-top: 76px;
+}
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000; --surface: #1c1c1e; --surface-2: #232326; --text: #f5f5f7; --text-2: #b0b0b5; --text-3: #9d9da2;
+    --hairline: rgba(255,255,255,.10); --hairline-2: rgba(255,255,255,.2); --fill: rgba(255,255,255,.08); --fill-2: rgba(255,255,255,.14);
+    --accent: #4fc0dc; --accent-press: #6ccbe3; --accent-soft: rgba(79,192,220,.15); --accent-text: #74cfe6; --on-accent: #032a33;
+    --ok: #5cc489; --warn: #f0b14a; --bad: #f2708f; --ok-soft: rgba(92,196,137,.15); --warn-soft: rgba(240,177,74,.14); --bad-soft: rgba(242,112,143,.14);
+    --c-sound: #2c3538; --c-norec: #3a3a40; --c-missoth: #6b6b73; --c-miss: #c8c8cf;
+    --shadow: 0 1px 2px rgba(0,0,0,.5), 0 8px 24px rgba(0,0,0,.35); --bar: rgba(10,10,12,.66);
+  }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { min-height: 100vh; background: var(--bg); }
+a { color: var(--accent-text); text-decoration: none; }
+a:hover { text-decoration: underline; }
+:focus-visible { outline: 3px solid color-mix(in srgb, var(--accent) 55%, transparent); outline-offset: 2px; border-radius: 8px; }
+[hidden] { display: none !important; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: 12px; top: -60px; z-index: 50; background: var(--surface); padding: 8px 14px; border-radius: 10px; box-shadow: var(--shadow); }
+.skip:focus { top: 10px; }
+code, .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .86em; }
+
+/* ---------- bar ---------- */
+.bar { position: sticky; top: 0; z-index: 30; background: var(--bar); border-bottom: 1px solid var(--hairline);
+  backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); }
+.bar-in { max-width: 1120px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; gap: 14px; }
+.brand { display: flex; align-items: center; gap: 10px; color: var(--text); font-weight: 650; letter-spacing: -.01em; }
+.brand:hover { text-decoration: none; }
+.brand svg { width: 28px; height: 28px; flex: none; }
+.brand small { font-weight: 400; color: var(--text-2); font-size: .82rem; letter-spacing: 0; }
+.bar nav { margin-left: auto; display: flex; gap: 2px; }
+.bar nav a { color: var(--text-2); font-size: .88rem; padding: 6px 10px; border-radius: 8px; white-space: nowrap; }
+.bar nav a:hover { color: var(--text); background: var(--fill); text-decoration: none; }
+@media (max-width: 720px) { .brand small, .bar nav a.wide { display: none; } .bar-in { padding: 10px 14px; } }
+
+main { max-width: 1120px; margin: 0 auto; padding: 0 20px 120px; }
+@media (max-width: 640px) { main { padding: 0 12px 120px; } }
+
+/* ---------- hero ---------- */
+.hero { text-align: center; padding: clamp(34px, 6vw, 68px) 0 22px; }
+.hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.06; letter-spacing: -.03em; margin: 0 0 14px; font-weight: 700; }
+.hero .lede { font-size: clamp(1.02rem, 1.7vw, 1.18rem); color: var(--text-2); max-width: 700px; margin: 0 auto; letter-spacing: -.006em; }
+.trust { margin: 22px auto 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 26px; color: var(--text-2); font-size: .88rem; }
+.trust span { display: inline-flex; align-items: center; gap: 8px; }
+.trust svg { width: 16px; height: 16px; color: var(--ok); flex: none; }
+
+/* ---------- tabs ---------- */
+.tabs-wrap { position: sticky; top: 53px; z-index: 20; margin: 8px -20px 18px; padding: 10px 20px; background: linear-gradient(var(--bg) 70%, transparent); }
+.tabs { display: flex; gap: 4px; padding: 4px; background: var(--fill); border-radius: 14px; overflow-x: auto; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tabs button { flex: 1 0 auto; border: 0; background: transparent; color: var(--text-2); font: inherit; font-size: .9rem; font-weight: 550;
+  padding: 8px 14px; border-radius: 10px; cursor: pointer; white-space: nowrap; transition: background-color 180ms ease, color 180ms ease, transform 100ms ease-out; }
+.tabs button:hover { color: var(--text); }
+.tabs button:active { transform: scale(.97); }
+.tabs button[aria-selected="true"] { background: var(--surface); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 1px rgba(0,0,0,.04); }
+@media (max-width: 640px) { .tabs-wrap { margin: 6px -12px 14px; padding: 8px 12px; top: 49px; } }
+
+/* ---------- layout ---------- */
+.panel { animation: panel-in 320ms var(--spring) both; }
+@keyframes panel-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.grid2 { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(300px, 1fr); gap: 18px; align-items: start; }
+@media (max-width: 900px) { .grid2 { grid-template-columns: 1fr; } }
+.card { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: clamp(16px, 3vw, 26px); margin-bottom: 18px; min-width: 0; }
+.card h2 { font-size: 1.22rem; letter-spacing: -.015em; margin: 0 0 4px; }
+.card h3 { font-size: 1rem; letter-spacing: -.01em; margin: 18px 0 8px; }
+.card .sub { margin: 0 0 14px; color: var(--text-2); font-size: .92rem; }
+.result-col { position: sticky; top: 124px; }
+@media (max-width: 900px) { .result-col { position: static; } }
+
+/* ---------- controls ---------- */
+.row { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: flex-end; margin: 10px 0; }
+.field { display: grid; gap: 5px; font-size: .86rem; color: var(--text-2); }
+.field > span { font-weight: 550; }
+input[type="number"], input[type="text"], select {
+  font: inherit; font-size: .95rem; color: var(--text); background: var(--fill); border: 1px solid transparent; border-radius: 10px;
+  padding: 8px 10px; min-height: 40px; transition: border-color 160ms ease, background-color 160ms ease; }
+input[type="number"] { width: 92px; }
+input:not([type=checkbox]):not([type=radio]):focus, select:focus { outline: none; border-color: var(--accent); background: var(--surface); }
+input[type=checkbox]:focus-visible, input[type=radio]:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.check { display: inline-flex; align-items: center; gap: 8px; font-size: .92rem; color: var(--text); cursor: pointer; min-height: 40px; }
+.check input { width: 18px; height: 18px; accent-color: var(--accent); }
+.btn { font: inherit; font-size: .92rem; font-weight: 600; border: 0; border-radius: 11px; padding: 9px 16px; min-height: 40px; cursor: pointer;
+  background: var(--fill); color: var(--text); transition: background-color 160ms ease, transform 100ms ease-out; }
+.btn:hover { background: var(--fill-2); }
+.btn:active { transform: scale(.97); transition-duration: 60ms; }
+.btn.primary { background: var(--accent); color: var(--on-accent); }
+.btn.primary:hover { background: var(--accent-press); }
+.btn.small { font-size: .84rem; padding: 6px 12px; min-height: 34px; border-radius: 9px; }
+.seg { display: inline-flex; gap: 4px; padding: 3px; background: var(--fill); border-radius: 11px; flex-wrap: wrap; }
+.seg button { border: 0; background: transparent; font: inherit; font-size: .86rem; font-weight: 550; color: var(--text-2); padding: 6px 12px; border-radius: 8px; cursor: pointer;
+  transition: background-color 160ms ease, color 160ms ease, transform 100ms ease-out; }
+.seg button:active { transform: scale(.97); }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--text); box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+
+/* ---------- code palette & odontogram ---------- */
+.palette { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 14px; }
+.palette button { display: inline-flex; align-items: center; gap: 7px; border: 0; font: inherit; font-size: .84rem; color: var(--text); background: var(--fill);
+  padding: 6px 10px 6px 7px; border-radius: 9px; cursor: pointer; transition: background-color 160ms ease, box-shadow 160ms ease, transform 100ms ease-out; }
+.palette button:hover { background: var(--fill-2); }
+.palette button:active { transform: scale(.96); }
+.palette button[aria-checked="true"] { box-shadow: inset 0 0 0 2px var(--accent); background: var(--accent-soft); }
+.swatch { width: 22px; height: 22px; border-radius: 6px; display: inline-grid; place-items: center; font-size: .74rem; font-weight: 700; color: #fff; flex: none; }
+.sw-0 { background: var(--c-sound); color: var(--text); } .sw-1 { background: var(--c-caries); } .sw-2 { background: var(--c-fillcar); } .sw-3 { background: var(--c-filled); }
+.sw-4 { background: var(--c-miss); color: var(--surface); } .sw-5 { background: var(--c-missoth); } .sw-6 { background: var(--c-seal); } .sw-7 { background: var(--c-crown); }
+.sw-8 { background: transparent; color: var(--text-2); box-shadow: inset 0 0 0 1.5px var(--text-3); border-style: dashed; } .sw-9 { background: var(--c-norec); color: var(--text-2); }
+.sw-clear { background: var(--surface); color: var(--text-3); box-shadow: inset 0 0 0 1.5px var(--hairline-2); }
+.sw-pufa { background: #8b2a3c; } .sw-pufa-none { background: var(--surface); color: var(--text-3); box-shadow: inset 0 0 0 1.5px var(--hairline-2); }
+.odonto { overflow-x: auto; padding: 4px 2px 10px; margin: 0 -4px; }
+.arch { display: grid; grid-template-columns: repeat(16, minmax(30px, 1fr)); gap: 3px; min-width: 528px; }
+.arch.prim { grid-template-columns: repeat(10, minmax(30px, 1fr)); min-width: 330px; max-width: 470px; margin: 0 auto; }
+.arch-label { font-size: .74rem; color: var(--text-3); text-transform: uppercase; letter-spacing: .06em; margin: 10px 0 5px; display: flex; justify-content: space-between; min-width: 528px; }
+.arch-label.prim { min-width: 330px; max-width: 470px; margin-left: auto; margin-right: auto; }
+.midline { height: 1px; background: var(--hairline-2); margin: 6px 0; min-width: 528px; }
+.tooth { position: relative; border: 0; font: inherit; cursor: pointer; border-radius: 10px; padding: 4px 0 5px; background: var(--fill); color: var(--text);
+  display: grid; gap: 2px; justify-items: center; min-height: 52px; transition: background-color 160ms ease, box-shadow 160ms ease, transform 100ms ease-out; }
+.tooth:hover { box-shadow: inset 0 0 0 1.5px var(--hairline-2); }
+.tooth:active { transform: scale(.94); transition-duration: 60ms; }
+.tooth .n { font-size: .68rem; color: var(--text-3); font-variant-numeric: tabular-nums; }
+.tooth .c { width: 26px; height: 24px; border-radius: 7px; display: grid; place-items: center; font-weight: 700; font-size: .82rem; color: #fff; }
+.tooth .c.sw-0, .tooth .c.sw-9 { color: var(--text-2); } .tooth .c.sw-8 { color: var(--text-2); box-shadow: inset 0 0 0 1.5px var(--text-3); } .tooth .c.sw-4 { color: var(--surface); }
+.tooth .c.empty { background: transparent; color: var(--text-3); box-shadow: inset 0 0 0 1px var(--hairline-2); }
+.tooth .pf { position: absolute; bottom: 2px; right: 2px; font-size: .62rem; font-weight: 800; color: #fff; background: #8b2a3c; border-radius: 5px; padding: 0 3px; line-height: 1.35; }
+.tooth.third .n::after { content: "·"; margin-left: 1px; }
+.legend-note { font-size: .82rem; color: var(--text-3); margin: 6px 0 0; }
+
+/* ---------- sextant grids ---------- */
+.sext { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; max-width: 520px; }
+.sext .cell { background: var(--fill); border-radius: 12px; padding: 10px; display: grid; gap: 6px; }
+.sext .cell b { font-size: .8rem; font-weight: 600; color: var(--text-2); }
+.sext .cell small { color: var(--text-3); font-size: .74rem; }
+.sext .cell select { width: 100%; }
+.sext .divider { grid-column: 1 / -1; height: 1px; background: var(--hairline-2); margin: 2px 0; }
+
+/* ---------- results ---------- */
+.result { min-height: 120px; }
+.big { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.big .val { font-size: clamp(2.4rem, 6vw, 3.4rem); font-weight: 700; letter-spacing: -.035em; line-height: 1; font-variant-numeric: tabular-nums; }
+.big .lab { font-size: 1rem; color: var(--text-2); font-weight: 550; }
+.pill { display: inline-flex; align-items: center; gap: 6px; font-size: .86rem; font-weight: 650; padding: 5px 11px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-text); }
+.pill.ok { background: var(--ok-soft); color: var(--ok); } .pill.warn { background: var(--warn-soft); color: var(--warn); } .pill.bad { background: var(--bad-soft); color: var(--bad); }
+.kv { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 8px; margin: 14px 0 4px; }
+.kv div { background: var(--surface-2); border: 1px solid var(--hairline); border-radius: 12px; padding: 8px 10px; }
+.kv dt { font-size: .74rem; color: var(--text-3); margin: 0; }
+.kv dd { margin: 2px 0 0; font-weight: 650; font-size: 1.02rem; font-variant-numeric: tabular-nums; }
+.bars { display: flex; height: 10px; border-radius: 6px; overflow: hidden; background: var(--fill); margin: 12px 0 6px; }
+.bars span { transition: flex-grow 420ms var(--spring); }
+.guidance { margin: 12px 0 0; padding: 12px 14px; border-radius: 12px; background: var(--accent-soft); font-size: .92rem; line-height: 1.45; }
+.warns { margin: 10px 0 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.warns li { font-size: .86rem; padding: 8px 12px; border-radius: 10px; background: var(--warn-soft); color: var(--text); }
+.err { font-size: .9rem; padding: 10px 12px; border-radius: 10px; background: var(--bad-soft); color: var(--bad); margin: 10px 0 0; }
+details.trace { margin-top: 12px; border-top: 1px solid var(--hairline); padding-top: 10px; }
+details.trace summary { cursor: pointer; font-size: .88rem; font-weight: 600; color: var(--text-2); list-style: none; display: flex; align-items: center; gap: 6px; }
+details.trace summary::-webkit-details-marker { display: none; }
+details.trace summary::before { content: ""; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); transition: transform 200ms var(--spring); }
+details.trace[open] summary::before { transform: rotate(45deg); }
+details.trace ol { margin: 8px 0 0; padding-left: 20px; font-size: .86rem; color: var(--text-2); display: grid; gap: 4px; }
+.srcs { margin: 10px 0 0; font-size: .8rem; color: var(--text-3); }
+.srcs a { color: var(--text-2); }
+.fade-in { animation: fade 260ms ease both; }
+@keyframes fade { from { opacity: .35; } to { opacity: 1; } }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 560px) { .two { grid-template-columns: 1fr; } }
+/* Phones: each arch wraps into its right half (first row) and left half (second row), so teeth stay large enough to tap. */
+@media (max-width: 600px) {
+  .arch { grid-template-columns: repeat(8, minmax(0, 1fr)); min-width: 0; row-gap: 6px; }
+  .arch.prim { grid-template-columns: repeat(5, minmax(0, 1fr)); min-width: 0; }
+  .arch-label, .arch-label.prim, .midline { min-width: 0 !important; }
+  .arch-label { justify-content: flex-start; gap: 6px; }
+  .arch-label span + span::before { content: "then "; }
+}
+
+/* ---------- tables ---------- */
+.table-wrap { overflow: auto; max-height: 460px; border: 1px solid var(--hairline); border-radius: 12px; margin-top: 10px; }
+table { border-collapse: collapse; width: 100%; font-size: .84rem; font-variant-numeric: tabular-nums; }
+th, td { padding: 7px 10px; text-align: left; border-bottom: 1px solid var(--hairline); white-space: nowrap; }
+thead th { position: sticky; top: 0; background: var(--surface-2); font-weight: 650; color: var(--text-2); z-index: 1; }
+tbody tr:hover { background: var(--fill); }
+.perio-table input[type="number"] { width: 46px; min-height: 32px; padding: 4px 5px; font-size: .86rem; border-radius: 7px; text-align: center; }
+.perio-table td { padding: 3px 4px; }
+.perio-table th { padding: 6px 4px; font-size: .76rem; text-align: center; }
+.perio-table td.tn { font-weight: 650; padding: 3px 8px; }
+.perio-table tr.missing td:not(.tn):not(.miss) { opacity: .25; pointer-events: none; }
+.perio-table .bopbox { width: 16px; height: 16px; accent-color: var(--bad); }
+.dropzone { border: 2px dashed var(--hairline-2); border-radius: 16px; padding: 22px; text-align: center; color: var(--text-2); transition: border-color 160ms ease, background-color 160ms ease; }
+.dropzone.over { border-color: var(--accent); background: var(--accent-soft); }
+.dropzone input { display: none; }
+
+/* ---------- reference ---------- */
+.ref-list { display: grid; gap: 10px; }
+.ref-item { padding: 12px 14px; background: var(--surface-2); border: 1px solid var(--hairline); border-radius: 12px; }
+.ref-item h4 { margin: 0 0 4px; font-size: .96rem; }
+.ref-item p { margin: 0; font-size: .86rem; color: var(--text-2); }
+.badge { font-size: .72rem; font-weight: 650; padding: 2px 8px; border-radius: 999px; margin-left: 6px; vertical-align: 1px; }
+.badge.primary { background: var(--ok-soft); color: var(--ok); } .badge.secondary { background: var(--accent-soft); color: var(--accent-text); }
+pre.cite { background: var(--surface-2); border: 1px solid var(--hairline); border-radius: 12px; padding: 12px 14px; overflow-x: auto; font-size: .82rem; white-space: pre-wrap; }
+
+footer { max-width: 1120px; margin: 0 auto; padding: 26px 20px 60px; color: var(--text-3); font-size: .84rem; border-top: 1px solid var(--hairline); }
+footer p { margin: 6px 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !important; }
+  .tooth:active, .btn:active, .seg button:active, .tabs button:active, .palette button:active { transform: none; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .bar { background: var(--bg); backdrop-filter: none; -webkit-backdrop-filter: none; }
+}
+@media (prefers-contrast: more) {
+  :root { --hairline: rgba(0,0,0,.35); --hairline-2: rgba(0,0,0,.55); --text-2: #2c2c30; --text-3: #3a3a40; }
+  .card { box-shadow: 0 0 0 1px var(--hairline-2); }
+}
+@media print {
+  .bar, .tabs-wrap, .hero .trust, footer nav, .palette, .no-print { display: none !important; }
+  body, :root { background: #fff; }
+  .card { box-shadow: none; border: 1px solid #ccc; break-inside: avoid; }
+  .grid2 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar">
+  <div class="bar-in">
+    <a class="brand" href="#top" aria-label="DentIndices home">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="15" fill="#0b6e86"/><path d="M20 14c-5 0-8 5-7 11 1 5 3 8 4 14 1 5 2 11 5 11 3 0 3-6 5-10 1-2 3-2 4 0 2 4 2 10 5 10 3 0 4-6 5-11 1-6 3-9 4-14 1-6-2-11-7-11-4 0-6 2-9 2s-5-2-9-2z" fill="#fff"/><path d="M22 30h20M22 36h14" stroke="#0b6e86" stroke-width="4" stroke-linecap="round"/></svg>
+      <span>DentIndices <small>oral-health indices</small></span>
+    </a>
+    <nav aria-label="Sections">
+      <a href="#calculators">Calculators</a>
+      <a class="wide" href="#reference">Indices &amp; sources</a>
+      <a href="#cite">Cite</a>
+      <a class="wide" href="https://github.com/Hezarani/dentindices" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="top">
+    <h1>Oral-health indices,<br>computed the way the sources define them.</h1>
+    <p class="lede">DMFT, SiC, PUFA, BPE, CPITN, BEWE, plaque and gingival indices, OHI-S, fluorosis, DAI and the CDC/AAP and 2018 (ACES) periodontitis case definitions — each rule traced to its publication, with the reasoning shown for every result.</p>
+    <div class="trust">
+      <span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Runs in your browser; nothing is uploaded</span>
+      <span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Every rule cited and tested</span>
+      <span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Same engine as <code>pip install dentindices</code></span>
+    </div>
+  </section>
+
+  <div class="tabs-wrap" id="calculators">
+    <div class="tabs" role="tablist" aria-label="Index families">
+      <button role="tab" id="tab-caries" aria-controls="p-caries" aria-selected="true">Caries</button>
+      <button role="tab" id="tab-screen" aria-controls="p-screen" aria-selected="false" tabindex="-1">Periodontal screening</button>
+      <button role="tab" id="tab-perio" aria-controls="p-perio" aria-selected="false" tabindex="-1">Periodontitis cases</button>
+      <button role="tab" id="tab-hyg" aria-controls="p-hyg" aria-selected="false" tabindex="-1">Hygiene &amp; gingiva</button>
+      <button role="tab" id="tab-wear" aria-controls="p-wear" aria-selected="false" tabindex="-1">Tooth wear</button>
+      <button role="tab" id="tab-fluor" aria-controls="p-fluor" aria-selected="false" tabindex="-1">Fluorosis</button>
+      <button role="tab" id="tab-dai" aria-controls="p-dai" aria-selected="false" tabindex="-1">Occlusion</button>
+      <button role="tab" id="tab-survey" aria-controls="p-survey" aria-selected="false" tabindex="-1">Survey data</button>
+    </div>
+  </div>
+
+  <!-- ===================== CARIES ===================== -->
+  <section class="panel" id="p-caries" role="tabpanel" aria-labelledby="tab-caries">
+    <div class="grid2">
+      <div class="card">
+        <h2>Dentition status (WHO 2013)</h2>
+        <p class="sub">Pick a code, then tap teeth to apply it. Tap a tooth again with the same code to clear it. Primary teeth use letters A–G.</p>
+        <div class="seg" role="group" aria-label="Palette">
+          <button type="button" id="pal-who" aria-pressed="true">WHO codes</button>
+          <button type="button" id="pal-pufa" aria-pressed="false">PUFA marks</button>
+        </div>
+        <div class="palette" id="palette" role="radiogroup" aria-label="Code to apply"></div>
+        <div class="row">
+          <label class="field"><span>Age (years)</span><input type="number" id="c-age" min="0" max="130" step="1" placeholder="e.g. 12"></label>
+          <label class="check"><input type="checkbox" id="c-third" checked> Include third molars (WHO basis 32)</label>
+          <label class="check"><input type="checkbox" id="c-prim"> Show primary teeth</label>
+        </div>
+        <div class="odonto" id="odonto"></div>
+        <div class="row no-print">
+          <button class="btn small" type="button" id="c-sound">Set empty permanent teeth to sound (0)</button>
+          <button class="btn small" type="button" id="c-example">Load an example</button>
+          <button class="btn small" type="button" id="c-clear">Clear chart</button>
+        </div>
+        <p class="legend-note">Codes 6 (sealant), 7 (crown/abutment/implant), 8 (unerupted) and 9 (not recorded) are not counted. WHO 2013 counts code 5 (missing for another reason) in M from age 30.</p>
+      </div>
+      <div class="result-col">
+        <div class="card result" id="r-caries" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SCREENING ===================== -->
+  <section class="panel" id="p-screen" role="tabpanel" aria-labelledby="tab-screen" hidden>
+    <div class="grid2">
+      <div class="card">
+        <h2>Periodontal screening</h2>
+        <div class="seg" role="group" aria-label="Screening index">
+          <button type="button" data-scr="bpe" aria-pressed="true">BPE (18+)</button>
+          <button type="button" data-scr="sbpe" aria-pressed="false">sBPE (7–17)</button>
+          <button type="button" data-scr="cpitn" aria-pressed="false">CPITN / CPI 1997</button>
+        </div>
+        <p class="sub" id="scr-sub" style="margin-top:12px"></p>
+        <div class="row" id="scr-age-row"><label class="field"><span>Age (years)</span><input type="number" id="scr-age" min="0" max="130" step="1" placeholder="age"></label></div>
+        <div id="scr-grid"></div>
+      </div>
+      <div class="result-col"><div class="card result" id="r-screen" aria-live="polite"></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== PERIO CASES ===================== -->
+  <section class="panel" id="p-perio" role="tabpanel" aria-labelledby="tab-perio" hidden>
+    <div class="card">
+      <h2>Periodontitis case definitions from a six-site chart</h2>
+      <p class="sub">Enter probing depth (PD) and clinical attachment level (CAL) in millimetres and tick bleeding on probing, for MB, B, DB (buccal) and ML, L, DL (lingual/palatal). Mark missing teeth. Third molars are excluded, as both definitions require.</p>
+      <div class="row no-print">
+        <button class="btn small" type="button" data-pex="healthy">Example: healthy</button>
+        <button class="btn small" type="button" data-pex="stage3">Example: stage III</button>
+        <button class="btn small" type="button" data-pex="stage4">Example: stage IV</button>
+        <button class="btn small" type="button" id="p-reset">Reset to healthy defaults</button>
+      </div>
+      <div class="table-wrap" style="max-height:420px"><table class="perio-table" id="perio-table"></table></div>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h2>ACES details</h2>
+        <p class="sub">Needed for gingivitis vs health (bleeding), grade (age, bone loss, smoking, diabetes) and, in planned surveys, tooth loss and complexity factors.</p>
+        <div class="row">
+          <div class="seg" role="group" aria-label="Survey type">
+            <button type="button" data-survey="completed" aria-pressed="true">Completed survey (Fig. 2)</button>
+            <button type="button" data-survey="planned" aria-pressed="false">Planned survey (Fig. 3)</button>
+          </div>
+        </div>
+        <div class="row">
+          <label class="field"><span>Age</span><input type="number" id="a-age" min="0" max="130" placeholder="years"></label>
+          <label class="field"><span>Cigarettes / day</span><input type="number" id="a-cig" min="0" max="200" placeholder="0 = non-smoker"></label>
+          <label class="field"><span>Diabetes</span><select id="a-dm"><option value="">unknown</option><option value="no">no</option><option value="yes">yes</option></select></label>
+          <label class="field"><span>HbA1c %</span><input type="number" id="a-hb" min="3" max="20" step="0.1" placeholder="e.g. 6.8"></label>
+          <label class="field"><span>Radiographic bone loss %</span><input type="number" id="a-bl" min="0" max="100" placeholder="worst tooth"></label>
+        </div>
+        <div class="row">
+          <label class="check"><input type="checkbox" id="a-fi"> Furcation class II/III</label>
+          <label class="check"><input type="checkbox" id="a-vbl"> Vertical bone loss ≥ 3 mm</label>
+        </div>
+        <div class="row" id="a-planned" hidden>
+          <label class="field"><span>Teeth lost to periodontitis</span><select id="a-lost"><option value="unknown">unknown</option><option value="0">none</option><option value="1-4">1–4</option><option value=">=5">5 or more</option></select></label>
+          <label class="check"><input type="checkbox" id="a-mob"> Mobility degree ≥ 2 at ≥ 2 teeth</label>
+          <label class="check"><input type="checkbox" id="a-bite"> Bite collapse, drifting or flaring</label>
+        </div>
+        <p class="sub" style="margin:14px 0 4px">CDC/AAP mild definition — readings where Eke et al. (2012) is not explicit:</p>
+        <div class="row">
+          <label class="check"><input type="checkbox" id="c-mild-same"> Allow the two CAL ≥ 3 mm sites on one tooth</label>
+          <label class="check"><input type="checkbox" id="c-mild-any"> Count one PD ≥ 5 mm at any site, not only interproximal</label>
+        </div>
+      </div>
+      <div class="result-col"><div class="card result" id="r-perio" aria-live="polite"></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== HYGIENE ===================== -->
+  <section class="panel" id="p-hyg" role="tabpanel" aria-labelledby="tab-hyg" hidden>
+    <div class="grid2">
+      <div class="card">
+        <h2>Oral hygiene and gingival indices</h2>
+        <div class="seg" role="group" aria-label="Hygiene index">
+          <button type="button" data-hyg="ohis" aria-pressed="true">OHI-S</button>
+          <button type="button" data-hyg="pli" aria-pressed="false">Plaque Index</button>
+          <button type="button" data-hyg="gi" aria-pressed="false">Gingival Index</button>
+          <button type="button" data-hyg="pcr" aria-pressed="false">Plaque Control Record</button>
+        </div>
+        <p class="sub" id="hyg-sub" style="margin-top:12px"></p>
+        <div id="hyg-body"></div>
+      </div>
+      <div class="result-col"><div class="card result" id="r-hyg" aria-live="polite"></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== WEAR ===================== -->
+  <section class="panel" id="p-wear" role="tabpanel" aria-labelledby="tab-wear" hidden>
+    <div class="grid2">
+      <div class="card">
+        <h2>Basic Erosive Wear Examination (BEWE)</h2>
+        <p class="sub">Highest score per sextant from the buccal, occlusal/incisal and lingual/palatal surfaces: 0 no wear · 1 initial loss of surface texture · 2 distinct defect, hard-tissue loss &lt; 50% of the surface · 3 loss ≥ 50%. Third molars only when they replace a second molar.</p>
+        <div id="bewe-grid"></div>
+      </div>
+      <div class="result-col"><div class="card result" id="r-wear" aria-live="polite"></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== FLUOROSIS ===================== -->
+  <section class="panel" id="p-fluor" role="tabpanel" aria-labelledby="tab-fluor" hidden>
+    <div class="grid2">
+      <div class="card">
+        <h2>Dean's index — one person</h2>
+        <p class="sub">Score the two most affected teeth (WHO 2013 codes). If they differ, the person's score is the less affected of the two.</p>
+        <div class="two" id="dean-person"></div>
+        <h2 style="margin-top:22px">Community Fluorosis Index — a group</h2>
+        <p class="sub">Number of people in each Dean category (codes 8 and 9 left out).</p>
+        <div class="kv" id="cfi-counts" style="grid-template-columns:repeat(auto-fill,minmax(130px,1fr))"></div>
+      </div>
+      <div class="result-col"><div class="card result" id="r-fluor" aria-live="polite"></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== DAI ===================== -->
+  <section class="panel" id="p-dai" role="tabpanel" aria-labelledby="tab-dai" hidden>
+    <div class="grid2">
+      <div class="card">
+        <h2>Dental Aesthetic Index (DAI)</h2>
+        <p class="sub">WHO 1997 regression equation. Measure with the CPI probe and record whole millimetres. Intended from about age 12.</p>
+        <div class="row" id="dai-fields"></div>
+      </div>
+      <div class="result-col"><div class="card result" id="r-dai" aria-live="polite"></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== SURVEY ===================== -->
+  <section class="panel" id="p-survey" role="tabpanel" aria-labelledby="tab-survey" hidden>
+    <div class="card">
+      <h2>Whole-survey processing</h2>
+      <p class="sub">Load a CSV file with one row per person (tooth columns named by FDI number such as <code>16</code> or <code>55</code>; sextant columns <code>UR UA UL LL LA LR</code> or <code>S1</code>–<code>S6</code>), or a long-format periodontal chart (<code>id, tooth, site, pd, cal, bop</code>). Everything is computed on this device; the file is never uploaded.</p>
+      <div class="dropzone" id="drop">
+        <p style="margin:0 0 10px"><strong>Drop a CSV file here</strong> or</p>
+        <label class="btn primary" for="file">Choose a file</label>
+        <input type="file" id="file" accept=".csv,text/csv,text/plain">
+        <p style="margin:12px 0 0;font-size:.86rem">Or load a synthetic example:
+          <button class="btn small" type="button" data-ex="caries_survey.csv">Caries survey (120 people)</button>
+          <button class="btn small" type="button" data-ex="perio_chart_long.csv">Periodontal charts (6 people)</button>
+          <button class="btn small" type="button" data-ex="bpe_survey.csv">BPE</button>
+          <button class="btn small" type="button" data-ex="bewe_survey.csv">BEWE</button>
+        </p>
+      </div>
+      <div id="survey-config" hidden>
+        <div class="row">
+          <label class="field"><span>Index</span><select id="s-index"></select></label>
+          <label class="field"><span>Age column</span><select id="s-age"></select></label>
+          <label class="field"><span>Group by</span><select id="s-by"></select></label>
+          <label class="field"><span>Summarise</span><select id="s-col"></select></label>
+          <label class="check" id="s-third-wrap"><input type="checkbox" id="s-third" checked> Include third molars</label>
+        </div>
+        <div class="row" id="s-perio-wrap" hidden>
+          <label class="check"><input type="checkbox" id="s-mild-same"> CDC/AAP mild: allow both CAL sites on one tooth</label>
+          <label class="check"><input type="checkbox" id="s-mild-any"> CDC/AAP mild: PD ≥ 5 mm at any site</label>
+          <label class="field"><span>ACES flowchart</span><select id="s-survey"><option value="completed">Completed survey (Fig. 2)</option><option value="planned">Planned survey (Fig. 3)</option></select></label>
+        </div>
+        <p class="sub" id="s-info"></p>
+      </div>
+    </div>
+    <div class="card" id="survey-summary" hidden>
+      <h2>Group summary</h2>
+      <p class="sub">Mean with SD, SE and t-based 95% CI; prevalence of values above zero with a Wilson 95% CI; Significant Caries Index (top third) and Specific affected Caries Index (mean among people with a value above zero), as WHO 2013, Bratthall 2000 and Schmoeckel 2019 describe.</p>
+      <div class="table-wrap"><table id="t-summary"></table></div>
+      <dl class="kv" id="s-extra" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))"></dl>
+    </div>
+    <div class="card" id="survey-rows" hidden>
+      <div class="row" style="justify-content:space-between;align-items:center;margin-top:0">
+        <h2 style="margin:0">Results per person</h2>
+        <button class="btn primary small" type="button" id="s-download">Download results (CSV)</button>
+      </div>
+      <div class="table-wrap"><table id="t-rows"></table></div>
+    </div>
+  </section>
+
+  <!-- ===================== REFERENCE ===================== -->
+  <section class="card" id="reference" style="margin-top:34px">
+    <h2>Indices and their sources</h2>
+    <p class="sub">Each index was checked against its source: <span class="badge primary">primary</span> means the original paper or manual was read; <span class="badge secondary">secondary</span> means the original is not openly available in full and the rule was checked against its abstract and/or independent publications that restate it. Where sources are silent or disagree, the choice made is listed below.</p>
+    <div class="ref-list" id="ref-list"></div>
+    <h3>Documented source discrepancies and choices</h3>
+    <div class="ref-list" id="ref-disc"></div>
+  </section>
+
+  <section class="card" id="cite">
+    <h2>Use it in your research</h2>
+    <p class="sub">Python: <code>pip install dentindices</code> — the same rules, plus a command line for whole surveys. Code, tests and the rule registry: <a href="https://github.com/Hezarani/dentindices" rel="noopener">github.com/Hezarani/dentindices</a>.</p>
+    <pre class="cite" id="cite-text"></pre>
+    <p class="sub" style="margin-top:12px">Please also cite the original publication of each index you report (listed above).</p>
+  </section>
+</main>
+
+<footer>
+  <p><strong>DentIndices</strong> is a research and education tool. Index values describe examination data; they are not a diagnosis, and screening guidance (BPE, BEWE) does not replace clinical judgement.</p>
+  <p>MIT licence · Hossein Boustani Hezarani (<a href="https://orcid.org/0009-0007-8481-0498" rel="noopener">ORCID 0009-0007-8481-0498</a>) · Part of the open DentGit portfolio · <span id="ver"></span></p>
+</footer>
+
+<script src="indices-data.js"></script>
+<script src="examples-data.js"></script>
+<script src="dentindices.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

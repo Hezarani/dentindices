@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dentindices"
+version = "1.0.0"
+description = "Oral-health epidemiology indices with cited, tested rules: DMFT/DMFS (WHO 2013), SiC/SaC, PUFA, BPE, CPITN, CPI, BEWE, plaque and gingival indices, OHI-S, Dean/CFI, DAI, and CDC/AAP and ACES (2018 classification) periodontitis case definitions."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Hossein Boustani Hezarani" }]
+dependencies = []
+keywords = [
+  "dentistry", "dental public health", "oral epidemiology", "DMFT", "dental caries", "Significant Caries Index",
+  "PUFA", "BPE", "CPITN", "periodontitis", "CDC/AAP", "ACES", "2018 classification", "BEWE", "erosive tooth wear",
+  "plaque index", "gingival index", "OHI-S", "dental fluorosis", "Dean index", "DAI", "WHO oral health surveys",
+]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Science/Research",
+  "Intended Audience :: Healthcare Industry",
+  "Intended Audience :: Education",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Scientific/Engineering :: Medical Science Apps.",
+  "Operating System :: OS Independent",
+  "Typing :: Typed",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[project.urls]
+Homepage = "https://github.com/Hezarani/dentindices"
+Documentation = "https://github.com/Hezarani/dentindices#readme"
+Repository = "https://github.com/Hezarani/dentindices"
+"Live app" = "https://hezarani.github.io/dentindices/"
+Issues = "https://github.com/Hezarani/dentindices/issues"
+Changelog = "https://github.com/Hezarani/dentindices/blob/main/CHANGELOG.md"
+
+[project.scripts]
+dentindices = "dentindices.cli:main"
+
+[tool.setuptools]
+packages = ["dentindices", "dentindices.data", "dentindices.data.examples"]
+
+[tool.setuptools.package-data]
+dentindices = ["py.typed"]
+"dentindices.data" = ["indices.json"]
+"dentindices.data.examples" = ["*.csv"]
+
+[tool.pytest.ini_options]
+pythonpath = [".", "tests"]
+testpaths = ["tests"]
